@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "sys": { "id": "1" },
+      "fields": {
+        "name": "Wooster Suede",
+        "subname": "Light Grey",
+        "price": 1499,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-1.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "2" },
+      "fields": {
+        "name": "Royale",
+        "subname": "Navy",
+        "price": 1999,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-2.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "3" },
+      "fields": {
+        "name": "Court",
+        "subname": "Blanco/Grey",
+        "price": 1399,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-3.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "4" },
+      "fields": {
+        "name": "Court",
+        "subname": "Grey",
+        "price": 1399,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-4.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "5" },
+      "fields": {
+        "name": "Royale",
+        "subname": "Blanco",
+        "price": 1699,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-5.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "6" },
+      "fields": {
+        "name": "Royale",
+        "subname": "Nero",
+        "price": 2399,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-6.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "7" },
+      "fields": {
+        "name": "Royale",
+        "subname": "Cuoio",
+        "price": 2299,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-7.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "8" },
+      "fields": {
+        "name": "Royale",
+        "subname": "Chocolate",
+        "price": 2999,
+        "image": { "fields": { "file": { "url": "./src/assets/images/item-8.jpg" } } }
+      }
+    }
+  ]
+}

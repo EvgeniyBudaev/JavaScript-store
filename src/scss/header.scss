@@ -1,0 +1,73 @@
+@import "variables";
+@import "mixins";
+@import "fonts";
+
+.shop__header {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url(../assets/images/header-bg.jpg);
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-logo a {
+    color: $white;
+    text-transform: uppercase;
+    font-size: 40px;
+    line-height: 60px;
+    font-weight: 600;
+  }
+
+  &-icon {
+    position: relative;
+  }
+
+  &-icon::before {
+    content: "\f07a";
+    font-family: "icomoon";
+    position: absolute;
+    top: 3px;
+    left: -40px;
+    width: 20px;
+    height: 20px;
+    font-size: 28px;
+  }
+
+  &-numbers {
+    background-color: $white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  &-content {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    padding-bottom: 50px;
+  }
+
+  &-title {
+    color: $white;
+    font-size: 64px;
+    line-height: 76px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+  }
+
+  &-subtitle {
+    color: $white;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+  }
+}
