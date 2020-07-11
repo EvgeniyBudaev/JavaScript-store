@@ -4,14 +4,19 @@ export class Shop {
   constructor(selector, options) {
     this.$el = $(selector)
     this.components = options.components || []
+    this.store = options.store
   }
 
   getRoot() {
     const $root = $.create('div', 'shop')
 
+    const componentOptions = {
+      store: this.store
+    }
+
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className)
-      const component = new Component($el)
+      const component = new Component($el, componentOptions)
       $el.html(component.toHTML())
       $root.append($el)
       return component

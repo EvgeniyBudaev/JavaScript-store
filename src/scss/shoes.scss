@@ -80,4 +80,21 @@
     max-width: 50px;
     width: 100%;
   }
+
+  &-minus,
+  &-plus {
+    cursor: pointer;
+    font-size: 50px;
+    width: 20px;
+    padding: 0 5px;
+    transition: all .3s;
+  }
+
+  &-minus:hover {
+    color: red;
+  }
+
+  &-plus:hover {
+    color: green;
+  }
 }

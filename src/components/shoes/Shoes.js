@@ -1,13 +1,17 @@
 import {ShopComponent} from "../../core/ShopComponent";
 import {ApiService} from "../../api/ApiService";
+import * as actions from '../../redux/actions';
+import {storage} from "../../core/utils";
 
 export class Shoes extends ShopComponent {
   static className = 'shop__shoes'
+  cart = []
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Shoes',
-      listeners: ['click']
+      listeners: ['click'],
+      ...options
     });
   }
 
@@ -28,12 +32,7 @@ export class Shoes extends ShopComponent {
                     <div class="shop__shoes-price">${product.price}</div>
                   </div>
                   <div class="shop__shoes-addToShoppingCart">
-                    <div class="shop__shoes-add">Добавить в корзину</div>
-                    <div class="shop__shoes-choose">
-                      <div class="shop__shoes-minus">-</div>
-                      <div class="shop__shoes-amount">0</div>
-                      <div class="shop__shoes-plus">+</div>
-                    </div>
+                    <button class="shop__shoes-add" data-id=${product.id}>Добавить в корзину</button>
                   </div>
                 </div>
     <!--    end of single product-->
@@ -48,14 +47,14 @@ export class Shoes extends ShopComponent {
 
     apiService.getProducts()
         .then(products => {
-          console.log('products:', products)
           this.displayProducts(products)
+          storage('products-state', products)
         })
   }
 
   toHTML() {
     this.transferProducts()
-
+    const {cartTotal} = this.store.getState()
     return `
           <div class="container">
             <div class="shop__shoes-inner">
@@ -63,24 +62,79 @@ export class Shoes extends ShopComponent {
               <div class="shop__shoes-items">
               ${this.displayProducts}
               </div>
+              <div class="shop__shoes-total title">${cartTotal ? cartTotal : 0}</div>
             </div>
           </div>
     `
   }
 
+  init() {
+    super.init();
+  }
+
+  setCartValues(cart) {
+    const cartItems = document.querySelector('.js__shop-numbers')
+    const cartTotal = document.querySelector('.shop__shoes-total')
+
+    let tempTotal = 0
+    let itemsTotal = 0
+    cart.map(item => {
+      tempTotal += item.price * item.amount
+      itemsTotal += item.amount
+    })
+    const itemsTotalParse = parseFloat(tempTotal.toFixed(2))
+    this.$dispatch(actions.shoesItems(itemsTotal))
+    this.$dispatch(actions.shoesTotal(itemsTotalParse))
+    cartTotal.innerText = parseFloat(tempTotal.toFixed(2))
+    cartItems.innerText = itemsTotal
+  }
+
+  // static setupAPP() {
+  //   const cart = Storage.getCart()
+  //   this.setCartValues(cart)
+  // }
+
+  getProduct(id) {
+    const products = JSON.parse(localStorage.getItem('products-state'))
+    return products.find(product => product.id === id)
+  }
+
   onClick(event) {
-    console.log('Shoes: onClick', event.target)
+    if (event.target.dataset.id) {
+      const id = event.target.dataset.id
+      // get product from products
+      const cartItem = {...this.getProduct(id), amount: 1}
+      console.log('cartItem', cartItem)
+      this.cart = [...this.cart, cartItem]
+      console.log('this.cart: ', this.cart)
+      // save cart in local storage
+      // Storage.saveCart(this.cart)
+      // set cart values
+      this.setCartValues(this.cart)
+    }
   }
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const shoes = new Shoes()
-//   const apiService = new ApiService()
+// class Storage {
+//   static saveProducts(products) {
+//     localStorage.setItem('products', JSON.stringify(products))
+//   }
 //
-//   apiService.getProducts()
-//       .then(products => {
-//         console.log('products:', products)
-//         shoes.displayProducts(products)
-//       })
-// })
+//   static getProduct(id) {
+//     const products = JSON.parse(localStorage.getItem('products'))
+//     return products.find(product => product.id === id)
+//   }
+//
+//   static saveCart(cart) {
+//     localStorage.setItem('cart', JSON.stringify(cart))
+//   }
+//
+//   static getCart() {
+//     return localStorage.getItem('cart')
+//       ? JSON.parse(localStorage.getItem('cart')) : []
+//   }
+// }
 
+// document.addEventListener('DOMContentLoaded', () => {
+//   Shoes.setupAPP()
+// })

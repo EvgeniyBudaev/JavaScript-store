@@ -3,7 +3,15 @@ import {ShopComponent} from "../../core/ShopComponent";
 export class Header extends ShopComponent {
   static className = 'shop__header'
 
+  constructor($root, options) {
+    super($root, {
+      name: 'Header',
+      ...options
+    });
+  }
+
   toHTML() {
+    const {cartItems} = this.store.getState()
     return `
           <div class="container">
             <div class="shop__header-inner">
@@ -14,7 +22,7 @@ export class Header extends ShopComponent {
                     <li>
                       <a href="#">
                         <div class="shop__header-icon"></div>
-                        <div class="shop__header-numbers">0</div>
+                        <div class="shop__header-numbers js__shop-numbers">${cartItems ? cartItems : 0}</div>
                       </a>
                     </li>
                   </ul>
@@ -27,5 +35,12 @@ export class Header extends ShopComponent {
             </div>
           </div>
     `
+  }
+
+  init() {
+    super.init();
+    // this.$subscribe(state => {
+    //   console.log('Header State: ', state)
+    // })
   }
 }
