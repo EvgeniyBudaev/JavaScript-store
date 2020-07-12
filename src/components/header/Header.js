@@ -6,6 +6,7 @@ export class Header extends ShopComponent {
   constructor($root, options) {
     super($root, {
       name: 'Header',
+      subscribe: ['currentNumbers'],
       ...options
     });
   }
@@ -22,7 +23,7 @@ export class Header extends ShopComponent {
                     <li>
                       <a href="#">
                         <div class="shop__header-icon"></div>
-                        <div class="shop__header-numbers js__shop-numbers">${cartItems ? cartItems : 0}</div>
+                        <div class="shop__header-numbers js__shop-numbers" id="headerNumbers">${cartItems ? cartItems : 0}</div>
                       </a>
                     </li>
                   </ul>
@@ -39,8 +40,18 @@ export class Header extends ShopComponent {
 
   init() {
     super.init();
+    this.$header = this.$root.find('#header')
     // this.$subscribe(state => {
     //   console.log('Header State: ', state)
     // })
+  }
+
+  // storeChanged(changes) {
+  //   console.log('changes ', changes)
+  // }
+
+  storeChanged({currentNumbers}) {
+    console.log('currentNumbers', currentNumbers)
+    this.$header.text(currentNumbers)
   }
 }

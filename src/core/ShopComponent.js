@@ -4,8 +4,8 @@ export class ShopComponent extends DomListener {
   constructor($root, options = {}) {
     super($root, options.listeners);
     this.name = options.name || ''
+    this.subscribe = options.subscribe || []
     this.store = options.store
-    this.storeSub = null
   }
 
   // Возвращает шаблон компонента
@@ -17,8 +17,11 @@ export class ShopComponent extends DomListener {
     this.store.dispatch(action)
   }
 
-  $subscribe(fn) {
-    this.storeSub = this.store.subscribe(fn)
+  // Сюда приходят только изменения по тем полям, на которые мы подписались
+  storeChanged() {}
+
+  isWatching(key) {
+    return this.subscribe.includes(key)
   }
 
   // Инициализируем компонент
@@ -31,6 +34,5 @@ export class ShopComponent extends DomListener {
   // Чистим слушателей
   destroy() {
     this.removeDOMListeners()
-    this.storeSub.unsubscribe()
   }
 }

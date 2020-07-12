@@ -19,12 +19,27 @@ class Dom {
     return this
   }
 
+  text(text) {
+    if (typeof text !== 'undefined') {
+      this.$el.textContent = text
+      return this
+    }
+    if (this.$el.tagName.toLowerCase() === 'div') {
+      return this.$el.value.trim()
+    }
+    return this.$el.textContent.trim()
+  }
+
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback)
   }
 
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector))
   }
 
   // Element

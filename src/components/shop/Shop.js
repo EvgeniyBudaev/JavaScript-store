@@ -1,10 +1,12 @@
 import {$} from "../../core/dom";
+import {StoreSubscriber} from "../../core/StoreSubscriber";
 
 export class Shop {
   constructor(selector, options) {
     this.$el = $(selector)
     this.components = options.components || []
     this.store = options.store
+    this.subscriber = new StoreSubscriber(this.store)
   }
 
   getRoot() {
@@ -27,6 +29,11 @@ export class Shop {
 
   render() {
     this.$el.append(this.getRoot())
+    this.subscriber.subscribeComponents(this.components)
     this.components.forEach(component => component.init())
+  }
+
+  destroy() {
+    this.subscriber.unsubscribeFromStore()
   }
 }
