@@ -14,6 +14,7 @@ class Dom {
     return this.$el.outerHTML.trim()
   }
   // $('div').html('<h1>Tst</h1>').clear()
+
   clear() {
     this.html('')
     return this

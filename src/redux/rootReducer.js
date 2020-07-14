@@ -1,5 +1,5 @@
 // Pure function
-import {SHOES_ITEMS, SHOES_TOTAL} from "./types";
+import {CART_ITEMS, SHOES_ITEMS, SHOES_TOTAL} from "./types";
 
 export function rootReducer(state, action) {
   switch (action.type) {
@@ -9,6 +9,9 @@ export function rootReducer(state, action) {
     case SHOES_TOTAL:
       // console.log('action SHOES_TOTAL:', action)
       return {...state, cartTotal: action.itemsTotalParse}
+    case CART_ITEMS:
+      // console.log('action SHOES_TOTAL:', action)
+      return {...state, carts: action.carts}
     default: return state
   }
 }

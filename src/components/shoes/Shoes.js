@@ -29,7 +29,7 @@ export class Shoes extends ShopComponent {
                       <div class="shop__shoes-name">${product.name}</div>
                       <div class="shop__shoes-subname">${product.subname}</div>
                     </div>
-                    <div class="shop__shoes-price">${product.price}</div>
+                    <div class="shop__shoes-price">${product.price} руб.</div>
                   </div>
                   <div class="shop__shoes-addToShoppingCart">
                     <button class="shop__shoes-add" data-id=${product.id}>Добавить в корзину</button>
@@ -89,11 +89,6 @@ export class Shoes extends ShopComponent {
     cartItems.innerText = itemsTotal
   }
 
-  // static setupAPP() {
-  //   const cart = Storage.getCart()
-  //   this.setCartValues(cart)
-  // }
-
   getProduct(id) {
     const products = JSON.parse(localStorage.getItem('products-state'))
     return products.find(product => product.id === id)
@@ -107,34 +102,10 @@ export class Shoes extends ShopComponent {
       console.log('cartItem', cartItem)
       this.cart = [...this.cart, cartItem]
       console.log('this.cart: ', this.cart)
-      // save cart in local storage
-      // Storage.saveCart(this.cart)
       // set cart values
       this.setCartValues(this.cart)
+      this.$dispatch(actions.cartItems(this.cart))
     }
   }
 }
 
-// class Storage {
-//   static saveProducts(products) {
-//     localStorage.setItem('products', JSON.stringify(products))
-//   }
-//
-//   static getProduct(id) {
-//     const products = JSON.parse(localStorage.getItem('products'))
-//     return products.find(product => product.id === id)
-//   }
-//
-//   static saveCart(cart) {
-//     localStorage.setItem('cart', JSON.stringify(cart))
-//   }
-//
-//   static getCart() {
-//     return localStorage.getItem('cart')
-//       ? JSON.parse(localStorage.getItem('cart')) : []
-//   }
-// }
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   Shoes.setupAPP()
-// })

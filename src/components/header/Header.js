@@ -21,7 +21,7 @@ export class Header extends ShopComponent {
                 <div class="shop__header-menu">
                   <ul>
                     <li>
-                      <a href="#">
+                      <a href="#shopping-cart">
                         <div class="shop__header-icon"></div>
                         <div class="shop__header-numbers js__shop-numbers" id="headerNumbers">${cartItems ? cartItems : 0}</div>
                       </a>
