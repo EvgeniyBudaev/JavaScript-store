@@ -62,7 +62,9 @@ export class Shoes extends ShopComponent {
               <div class="shop__shoes-items">
               ${this.displayProducts}
               </div>
-              <div class="shop__shoes-total title">${cartTotal ? cartTotal : 0}</div>
+              <div class="shop__shoes-total title">
+              ${cartTotal ? cartTotal : 0} 
+              </div>
             </div>
           </div>
     `
